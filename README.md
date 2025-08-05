@@ -137,7 +137,7 @@ Você vai ver algo como:
 - GetBalanceResponse.java
 - Network.java
 ```
-# Criação do servidor gRPC básico
+# Criação do servidor gRPC básico:
 No src/main/java/com/maicon/wallet/ crie GrpcServer.java:
 ```
 package com.maicon.wallet;
@@ -197,6 +197,14 @@ public class WalletServiceImpl extends EthereumWalletServiceGrpc.EthereumWalletS
     }
 }
 
+```
+# Rodando o servidor:
+```
+mvn compile exec:java -Dexec.mainClass="com.maicon.wallet.GrpcServer"
+```
+Você deve ver no terminal:
+```
+🚀 gRPC server started on port 50051
 ```
 
 
