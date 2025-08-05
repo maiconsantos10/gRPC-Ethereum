@@ -3,8 +3,8 @@
  </div>
  
 <h1><i> Ⅰ - Sejam bem vindos ao futuro. II - É recomendado e indispensável que todos apertem os cintos, pois todo o conhecimento necessário será passado durante a leitura deste documento. III - Para aqueles que ainda não estão prontos para a verdade, caiam de joelhos e entendam que todos devem servir ao verdadeiro Senhor, dos vivos e dos mortos. </i> </h1>
-
-
+<br> <br> 
+ 
  # Módulo gRPC 
  ```
  É uma arquitetura e um sistema de API de código aberto controlados pela Cloud Native Computing Foundation.
@@ -16,10 +16,11 @@
  Melhor desempenho dos serviços.
  Features nativas do HTTP/2, como streaming de dados, load balance, monitoramento etc.
 ```
-# O que a Task pede? 
+# O que incluirá na funcionalidade? 
  ```
 Criação de carteira, consulta de saldo, envio transacional e assinatura de mensagens.
 ```
+# Iniciando a task:
 
 
 
