@@ -5,18 +5,18 @@
 <h1><i> Ⅰ - Sejam bem vindos ao futuro. II - É recomendado e indispensável que todos apertem os cintos, pois todo o conhecimento necessário será passado durante a leitura deste documento. III - Para aqueles que ainda não estão prontos para a verdade, caiam de joelhos e entendam que todos devem servir ao verdadeiro Senhor, dos vivos e dos mortos. </i> </h1>
 <br> <br> 
  
- # Módulo gRPC 
+ # ✏️ Módulo gRPC 
  ```
  É uma arquitetura e um sistema de API de código aberto controlados pela Cloud Native Computing Foundation.
  A proposta é que o cliente interaja com o servidor por meio de chamadas de funções simples, ou seja, de interface de códigos geradas pelo próprio gRPC. 
  ```
- # Vantagem na arquitetura de microsserviços 
+ # ✏️ Vantagem na arquitetura de microsserviços 
  ```
  Fácil o contrato entre cliente e servidor.
  Melhor desempenho dos serviços.
  Features nativas do HTTP/2, como streaming de dados, load balance, monitoramento etc.
 ```
-# O que incluirá na funcionalidade? 
+# ✏️ O que incluirá na funcionalidade? 
  ```
 Criação de carteira, consulta de saldo, envio transacional e assinatura de mensagens.
 ```
@@ -43,7 +43,7 @@ Logo abaixo de <version>1.0-SNAPSHOT</version>, adicione as propriedades:
     <web3j.version>4.10.0</web3j.version>
 </properties>
 ```
-Dentro de *dependencies - /dependencies*..., adicione essas dependências (você pode deixar a de junit que já veio, não precisa apagar):    
+3) Dentro de *dependencies - /dependencies*..., adicione essas dependências (você pode deixar a de junit que já veio, não precisa apagar):    
 ```
 <!-- gRPC -->
 <dependency>
@@ -75,9 +75,13 @@ Dentro de *dependencies - /dependencies*..., adicione essas dependências (você
     <artifactId>core</artifactId>
     <version>${web3j.version}</version>
 </dependency>
+```  
+4) Salve o pom.xml e teste se o Maven consegue compilar:
+```
+mvn clean compile
 ```
 
-
+> Se aparecer algo como "BUILD SUCCESS", quer dizer que o projeto já está pronto para receber o .proto e gerar o código gRPC.
 
 
 
