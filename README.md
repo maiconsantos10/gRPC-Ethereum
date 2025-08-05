@@ -202,10 +202,20 @@ public class WalletServiceImpl extends EthereumWalletServiceGrpc.EthereumWalletS
 ```
 mvn compile exec:java -Dexec.mainClass="com.maicon.wallet.GrpcServer"
 ```
-Você deve ver no terminal:
+1.1 Você deve ver no terminal:
 ```
 🚀 gRPC server started on port 50051
 ```
+1.2 Se o reflection estiver ativado, você vai ver:
+```
+wallet.EthereumWalletService
+grpc.reflection.v1alpha.ServerReflection
+```
+1.3 Depois, teste a chamada:
+```
+grpcurl -plaintext -d '{"network":"SEPOLIA","address":"0x0000000000000000000000000000000000000000"}' localhost:50051 wallet.EthereumWalletService/GetBalance
+```
+
 
 
 <i>
