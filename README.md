@@ -82,9 +82,122 @@ mvn clean compile
 ```
 
 > Se aparecer algo como "BUILD SUCCESS", quer dizer que o projeto já está pronto para receber o .proto e gerar o código gRPC.
+<br>
 
+# Criação do arquivo proto
+1.1 Crie a pasta:
+```
+src/main/proto
+```
+1.2 Dentro dela, crie o arquivo:
+```
+wallet.proto
+```
+1.3 Adicione ao arquivo:
+```
+syntax = "proto3";
 
+package wallet;
+option java_multiple_files = true;
+option java_package = "com.maicon.wallet.grpc";
 
+enum Network { 
+  MAINNET = 0; 
+  SEPOLIA = 1; 
+}
+
+service EthereumWalletService {
+  rpc GetBalance (GetBalanceRequest) returns (GetBalanceResponse);
+}
+
+message GetBalanceRequest {
+  Network network = 1;
+  string address = 2;
+}
+
+message GetBalanceResponse {
+  string balance_wei = 1;
+  string balance_eth = 2;
+}
+```
+# Gerando as classes Java do gRPC
+1.1 No terminal:
+```
+mvn clean compile
+```
+1.2 Se funcionar, o Maven vai criar as classes Java geradas do .proto em:
+```
+target/generated-sources/protobuf/java
+target/generated-sources/protobuf/grpc-java
+```
+Você vai ver algo como: 
+```
+- EthereumWalletServiceGrpc.java
+- GetBalanceRequest.java
+- GetBalanceResponse.java
+- Network.java
+```
+# Criação do servidor gRPC básico
+No src/main/java/com/maicon/wallet/ crie GrpcServer.java:
+```
+package com.maicon.wallet;
+
+import io.grpc.Server;
+import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
+
+import java.io.IOException;
+import java.util.logging.Logger;
+
+public class GrpcServer {
+    private static final Logger LOG = Logger.getLogger(GrpcServer.class.getName());
+    private Server server;
+
+    public void start() throws IOException {
+        server = NettyServerBuilder.forPort(50051)
+                .addService(new WalletServiceImpl())
+                .build()
+                .start();
+        LOG.info("🚀 gRPC server started on port 50051");
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            if (server != null) server.shutdown();
+        }));
+    }
+
+    public void blockUntilShutdown() throws InterruptedException {
+        if (server != null) server.awaitTermination();
+    }
+
+    public static void main(String[] args) throws Exception {
+        GrpcServer s = new GrpcServer();
+        s.start();
+        s.blockUntilShutdown();
+    }
+}
+
+```
+E crie WalletServiceImpl.java:
+```
+package com.maicon.wallet;
+
+import com.maicon.wallet.grpc.EthereumWalletServiceGrpc;
+import com.maicon.wallet.grpc.GetBalanceRequest;
+import com.maicon.wallet.grpc.GetBalanceResponse;
+import io.grpc.stub.StreamObserver;
+
+public class WalletServiceImpl extends EthereumWalletServiceGrpc.EthereumWalletServiceImplBase {
+    @Override
+    public void getBalance(GetBalanceRequest req, StreamObserver<GetBalanceResponse> respObs) {
+        // Resposta fixa só para teste
+        GetBalanceResponse resp = GetBalanceResponse.newBuilder()
+                .setBalanceWei("0")
+                .setBalanceEth("0")
+                .build();
+        respObs.onNext(resp);
+        respObs.onCompleted();
+    }
+}
+
+```
 
 
 <i>
