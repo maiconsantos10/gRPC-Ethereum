@@ -21,7 +21,7 @@
 Criação de carteira, consulta de saldo, envio transacional e assinatura de mensagens.
 ```
 # Iniciando a task:
-Iniciando o MAven
+Iniciando o Maven
 1) Criar o projeto Maven (Terminal VSCode)
 Crie uma pasta onde quiser e abra no VSCode. Depois no terminal:
 ```
@@ -32,7 +32,50 @@ mvn -B archetype:generate \
  -DarchetypeVersion=1.4 \
  -DinteractiveMode=false
 ```
+2) Ajustar o pom.xml para gRPC + web3j
+Logo abaixo de <version>1.0-SNAPSHOT</version>, adicione as propriedades:
+```
+<properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <grpc.version>1.62.2</grpc.version>
+    <protobuf.version>3.25.3</protobuf.version>
+    <web3j.version>4.10.0</web3j.version>
+</properties>
+```
+Dentro de *dependencies - /dependencies*..., adicione essas dependências (você pode deixar a de junit que já veio, não precisa apagar):    
+```
+<!-- gRPC -->
+<dependency>
+    <groupId>io.grpc</groupId>
+    <artifactId>grpc-netty-shaded</artifactId>
+    <version>${grpc.version}</version>
+</dependency>
+<dependency>
+    <groupId>io.grpc</groupId>
+    <artifactId>grpc-protobuf</artifactId>
+    <version>${grpc.version}</version>
+</dependency>
+<dependency>
+    <groupId>io.grpc</groupId>
+    <artifactId>grpc-stub</artifactId>
+    <version>${grpc.version}</version>
+</dependency>
 
+<!-- Protobuf runtime -->
+<dependency>
+    <groupId>com.google.protobuf</groupId>
+    <artifactId>protobuf-java</artifactId>
+    <version>${protobuf.version}</version>
+</dependency>
+
+<!-- Web3j para integração Ethereum -->
+<dependency>
+    <groupId>org.web3j</groupId>
+    <artifactId>core</artifactId>
+    <version>${web3j.version}</version>
+</dependency>
+```
 
 
 
