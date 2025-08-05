@@ -21,8 +21,17 @@
 Criação de carteira, consulta de saldo, envio transacional e assinatura de mensagens.
 ```
 # Iniciando a task:
-
-
+Iniciando o MAven
+1) Criar o projeto Maven (Terminal VSCode)
+Crie uma pasta onde quiser e abra no VSCode. Depois no terminal:
+```
+mvn -B archetype:generate \
+ -DgroupId=com.maicon.wallet \
+ -DartifactId=wallet-grpc-service \
+ -DarchetypeArtifactId=maven-archetype-quickstart \
+ -DarchetypeVersion=1.4 \
+ -DinteractiveMode=false
+```
 
 
 
