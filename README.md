@@ -215,7 +215,7 @@ grpc.reflection.v1alpha.ServerReflection
 ```
 grpcurl -plaintext -d '{"network":"SEPOLIA","address":"0x0000000000000000000000000000000000000000"}' localhost:50051 wallet.EthereumWalletService/GetBalance
 ```
-
+> Se isso responder, já podemos avançar para integrar o web3j e buscar saldo real na blockchain.
 
 
 <i>
